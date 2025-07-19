@@ -6,10 +6,10 @@ from server import sha256
 
 
 def main():
-    SECURE_PHRASE = 'sometext'
-    SECURE_KEY = input('Input open key: ').strip() + SECURE_PHRASE
-
-    print('Your password: ', int(sha256(SECURE_KEY)[0:6], 16))
+    SALT = 'sometext'
+    SECURE_KEY = input('Input open key: ').strip() + SALT
+    PASSW = int(sha256(SECURE_KEY)[0:6], 16)
+    print('Your password: {}'.format(PASSW))
 
 
 if __name__ == '__main__':

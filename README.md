@@ -1,2 +1,2 @@
-# DynamicPassw
-Just for testing.
+# Dynamic Password
+Test login into some machine wia qr code.
