@@ -6,15 +6,14 @@ import hashlib
 
 
 def main():
-    old = input()
-    new = old + 'sometext'
-    print(int(sha256(new)[0:6], 16))
+    msg = input('Input open key: ').strip() + 'sometext'
+    print('Your password: ', int(sha256(msg)[0:6], 16))
 
 
 def sha256(mess):
     m = hashlib.sha256()
     m.update(bytes(mess, 'utf-8'))
-    return (str(m.hexdigest()))
+    return (m.hexdigest())
 
 
 if __name__ == '__main__':

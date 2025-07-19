@@ -9,11 +9,11 @@ import hashlib
 def main():
     mess = str(time.time()) + 'UNONA'
     old = sha256(mess)
-    new = str(old) + 'sometext'
-    print(old)
+    new = old + 'sometext'
+    print('Open key: ', old)
     dig = int(sha256(new)[0:6], 16)
 
-    if int(input()) == dig:
+    if int(input("Input password: ")) == dig:
         print('succes')
     else:
         print('fail')
@@ -22,7 +22,7 @@ def main():
 def sha256(mess):
     m = hashlib.sha256()
     m.update(bytes(mess, 'utf-8'))
-    return (str(m.hexdigest()))
+    return (m.hexdigest())
 
 
 if __name__ == '__main__':
