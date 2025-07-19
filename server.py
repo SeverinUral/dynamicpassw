@@ -7,22 +7,25 @@ import hashlib
 
 
 def main():
-    mess = str(time.time()) + 'UNONA'
-    old = sha256(mess)
-    new = old + 'sometext'
-    print('Open key: ', old)
-    dig = int(sha256(new)[0:6], 16)
+    SECURE_PHRASE = 'sometext'
 
-    if int(input("Input password: ")) == dig:
+    rnd_phrase = str(time.time()) + SECURE_PHRASE
+
+    OPEN_KEY = sha256(rnd_phrase)
+    SECURE_KEY = OPEN_KEY + SECURE_PHRASE
+    PASSW = int(sha256(SECURE_KEY)[0:6], 16)
+
+    print('Open key: ', OPEN_KEY)
+    if int(input("Input password: ")) == PASSW:
         print('succes')
     else:
         print('fail')
 
 
-def sha256(mess):
-    m = hashlib.sha256()
-    m.update(bytes(mess, 'utf-8'))
-    return (m.hexdigest())
+def sha256(data) -> str:
+    hsh = hashlib.sha256()
+    hsh.update(bytes(data, 'utf-8'))
+    return hsh.hexdigest()
 
 
 if __name__ == '__main__':
