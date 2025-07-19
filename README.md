@@ -1,2 +1,2 @@
 # Dynamic Password
-Test login into some machine wia qr code.
+Test login into some machine via qr code.
