@@ -3,8 +3,10 @@
 # (c) 2025 Fomenko A V
 
 import time
-import qrcode
 import hashlib
+
+import qrcode
+from qrcode.image.pure import PyPNGImage
 
 
 def main():
@@ -25,7 +27,7 @@ def main():
 
 
 def qr_gen(data):
-    img = qrcode.make(data)
+    img = qrcode.make(data, image_factory=PyPNGImage)
     img.save("qr.png")
     print("QR-code save as <qr.png>")
 
