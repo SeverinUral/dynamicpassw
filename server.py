@@ -2,6 +2,7 @@
 # -*- coding utf-8 -*-
 # (c) 2025 Fomenko A V
 
+import io
 import time
 import hashlib
 
@@ -27,7 +28,15 @@ def main():
 
 
 def qr_gen(data):
-    img = qrcode.make(data, image_factory=PyPNGImage)
+    f = io.StringIO()
+    qr = qrcode.QRCode()
+    qr.add_data(data)
+
+    qr.print_ascii(out=f)
+    f.seek(0)
+    print(f.read())
+
+    img = qr.make_image(image_factory=PyPNGImage)
     img.save("qr.png")
     print("QR-code save as <qr.png>")
 
