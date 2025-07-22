@@ -2,7 +2,6 @@
 # -*- coding utf-8 -*-
 # (c) 2025 Fomenko A V
 
-import io
 import time
 import hashlib
 
@@ -12,10 +11,7 @@ from qrcode.image.pure import PyPNGImage
 
 def main():
     SALT = 'sometext'
-
-    rnd_phrase = str(time.time()) + SALT
-
-    OPEN_KEY = sha256(rnd_phrase)
+    OPEN_KEY = sha256(str(time.time()) + SALT)
     SECURE_KEY = OPEN_KEY + SALT
     PASSW = int(sha256(SECURE_KEY)[0:6], 16)
 
@@ -28,17 +24,13 @@ def main():
 
 
 def qr_gen(data):
-    f = io.StringIO()
     qr = qrcode.QRCode()
     qr.add_data(data)
 
-    qr.print_ascii(out=f)
-    f.seek(0)
-    print(f.read())
+    qr.print_ascii()
 
     img = qr.make_image(image_factory=PyPNGImage)
     img.save("qr.png")
-    print("QR-code save as <qr.png>")
 
 
 def sha256(data) -> str:
