@@ -10,17 +10,17 @@ from qrcode.image.pure import PyPNGImage
 
 
 def main():
-    SALT = 'sometext'
+    SALT = "sometext"
     OPEN_KEY = sha256(str(time.time()) + SALT)
     SECURE_KEY = OPEN_KEY + SALT
     PASSW = int(sha256(SECURE_KEY)[0:6], 16)
 
     qr_gen(OPEN_KEY)
-    print('Open key: {}'.format(OPEN_KEY))
+    print(f"Open key: {OPEN_KEY}")
     if int(input("Input password: ")) == PASSW:
-        print('succes')
+        print("succes")
     else:
-        print('fail')
+        print("fail")
 
 
 def qr_gen(data):
@@ -35,9 +35,9 @@ def qr_gen(data):
 
 def sha256(data) -> str:
     hsh = hashlib.sha256()
-    hsh.update(bytes(data, 'utf-8'))
+    hsh.update(bytes(data, "utf-8"))
     return hsh.hexdigest()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

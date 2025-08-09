@@ -6,11 +6,11 @@ from server import sha256
 
 
 def main():
-    SALT = 'sometext'
-    SECURE_KEY = input('Input open key: ').strip() + SALT
+    SALT = "sometext"
+    SECURE_KEY = input("Input open key: ").strip() + SALT
     PASSW = int(sha256(SECURE_KEY)[0:6], 16)
-    print('Your password: {}'.format(PASSW))
+    print(f"Your password: {PASSW}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
