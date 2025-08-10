@@ -8,19 +8,24 @@ import hashlib
 import qrcode
 from qrcode.image.pure import PyPNGImage
 
+SALT = "sometext"
+
 
 def main():
-    SALT = "sometext"
+    NUMBER_OF_TRIES = 5
     OPEN_KEY = sha256(str(time.time()) + SALT)
     SECURE_KEY = OPEN_KEY + SALT
     PASSW = int(sha256(SECURE_KEY)[0:6], 16)
 
     qr_gen(OPEN_KEY)
     print(f"Open key: {OPEN_KEY}")
-    if int(input("Input password: ")) == PASSW:
-        print("succes")
-    else:
-        print("fail")
+    while NUMBER_OF_TRIES:
+        if int(input("Input password: ")) == PASSW:
+            print("succes")
+            return
+        else:
+            print("fail\ntry again...")
+            NUMBER_OF_TRIES -= 1
 
 
 def qr_gen(data):
